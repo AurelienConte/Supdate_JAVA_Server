@@ -1,16 +1,13 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => 'install', 'middleware' => 'install'], function() {
+  Route::get('/', array('as' => 'g_step', 'uses' => 'Install\InstallController@getStep'));
+  Route::post('/', array('as' => 'v_step', 'uses' => 'Install\InstallController@setStep'));
 });
+
+Route::group(['prefix' => 'administration'], function() {
+
+});
+
+Route::get('/login', array('as' => 'login', 'uses' => 'Auth\AuthController@getLogin'));
+Route::post('/login', array('as' => 'login', 'uses' => 'Auth\AuthController@sendLogin'));
