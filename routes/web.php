@@ -11,6 +11,7 @@ Route::group(['middleware' => 'redirectInstall'], function () {
     Route::post('/', array('as' => 'dashboard_p', 'uses' => 'Administration\DashboardController@home_p'));
 
     Route::get('/project_management/{FOLDER_NAME}', array('as' => 'project_management', 'uses' => 'Administration\ProjectController@home'));
+    Route::post('/project_management', array('as' => 'project_submit', 'uses' => 'Administration\ProjectController@gen_xml'));
 
     Route::get('/logout', array('as' => 'logout', 'uses' => 'Auth\AuthController@Logout'));
   });

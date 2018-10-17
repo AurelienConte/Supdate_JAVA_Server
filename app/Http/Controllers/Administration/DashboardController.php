@@ -30,7 +30,9 @@ class DashboardController extends Controller
         } else if($del) {
           if(rmdir(public_path() . '\JAVA_UPDATER\files\/' . $del))
           {
-            unlink(public_path() . '\JAVA_UPDATER\xml\/' . $del . '.xml');
+            try {
+              unlink(public_path() . '\JAVA_UPDATER\xml/' . $del . ".xml");
+            } catch (ErrorException $e) { }
             return redirect()->route('dashboard')->with(['success' => 'Folder deleted !']);
           } else
             return redirect()->route('dashboard')->with(['error' => "This folder cannot be deleted !"]);

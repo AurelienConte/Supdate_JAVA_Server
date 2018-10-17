@@ -22,7 +22,11 @@
             <div class="home-box" style="color:black;">
                 <h3 class="home-title">Project files</h3>
                 <hr>
-                <button type="submit" id="check_all" class="btn btn-primary">Select all</button> | <button type="submit" name="see" class="btn btn-success">Generate xml</button>
+                <form method="post" action="{{ url('administration/project_management') }}">
+                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                    <input type="hidden" name="FOLDER" value="{{ $FOLDER_NAME }}">
+                    <button type="button" id="check_all" class="btn btn-primary">Select all</button> | <button type="submit" name="see" class="btn btn-success">Generate xml</button>
+
                 <hr>
                 <table class="table">
                     <thead class="thead-dark">
@@ -33,8 +37,6 @@
                         <th scope="col">File name</th>
                     </tr>
                     </thead>
-                    <form method="post" action="{{ url('administration') }}">
-                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                         <tbody>
                         <?php $i = 0; ?>
                         @foreach($folders as $f)
@@ -42,7 +44,7 @@
                           <?php $i = $i + 1; ?>
                           <tr>
                               <th scope="row">{{$i}}</th>
-                              <td>@if($type != 'dir') <input type="checkbox" id="selected" name="SELECTED[]"> @endif</td>
+                              <td>@if($type != 'dir') <input type="checkbox" id="selected" name="SELECTED[]" value="{{$f}}"> @endif</td>
                               <td>
                                   <?php
                                 $finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -50,7 +52,7 @@
                                 finfo_close($finfo);
                                 ?>
                                   @if($MIM == "application/x-rar" || $MIM == "application/octet-stream")
-                                          <input type="checkbox" id="selected" name="EXTRACT[]">
+                                          <input type="checkbox" id="selected" name="EXTRACT[]" value="{{$f}}">
                                   @endif
                               </td>
                               <td>
@@ -67,7 +69,7 @@
                           </tr>
                         @endforeach
                         </tbody>
-                    </form>
+                </form>
                 </table>
             </div>
         </div>

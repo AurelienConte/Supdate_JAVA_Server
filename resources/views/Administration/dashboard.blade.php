@@ -34,6 +34,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Action</th>
                             <th scope="col">Directory Name</th>
+                            <th scope="col">XML exist ?</th>
                         </tr>
                         </thead>
                         <form method="post" action="{{ url('administration') }}">
@@ -41,11 +42,19 @@
                             <tbody>
                             <?php $i = 0; ?>
                             @foreach($folders as $f)
+                                <?php $xml = file_exists(public_path() . '\JAVA_UPDATER\xml/' . $f . ".xml"); ?>
                                 <?php $i = $i + 1; ?>
                                 <tr>
                                     <th scope="row">{{$i}}</th>
                                     <td><button type="submit" name="see" value="{{$f}}" class="btn btn-primary"><i class="fas fa-eye"></i></button> | <button type="submit" name="del" value="{{$f}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
                                     <td>{{$f}}</td>
+                                    <td>
+                                        @if($xml)
+                                            <span style="color: green;">Yes</span>
+                                        @else
+                                            <span style="color: red;">No</span>
+                                        @endif
+                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
