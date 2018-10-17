@@ -1,7 +1,16 @@
 @extends("main")
 @section("content")
+    <br><br>
     <div class="row">
+
+
         <div class="col-md-12">
+            @if (Session::has('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ Session::get('error') }}
+                </div>
+            @endif
+
             <div class="home-box" style="color:black;">
                 <form method="post" action="{{ url('login/') }}">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">

@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use App\Users;
 
@@ -20,9 +21,14 @@ class Install
   {
     $Instance = new Users();
 
-    if($Instance->GetAll() != null) {
-      return redirect()->route('login');
+    try {
+      $res = $Instance->GetAll()->count();
+      if($res != 0) {
+        return redirect()->route('login');
+      }
+      return $next($request);
+    } catch (QueryException $e) {
+      return $next($request);
     }
-    return $next($request);
   }
 }

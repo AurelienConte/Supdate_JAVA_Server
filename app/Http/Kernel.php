@@ -38,6 +38,10 @@ class Kernel extends HttpKernel
 
         ],
 
+        'redirectInstall' => [
+              \App\Http\Middleware\redirectInstall::class,
+        ],
+
         'install' => [
                 \App\Http\Middleware\Install::class,
         ],

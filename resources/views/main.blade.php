@@ -51,7 +51,7 @@
 
 
 <header>
-@if(Request::is('/administration/*'))
+@if(session()->has('creditentials'))
     <!-- Menu de navigation -->
     <nav class="navigation">
         <div class="container">
@@ -68,7 +68,8 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
                             <ul class="navbar-nav">
-                                <li id="nav-home"><a href="index.html">Accueil</a></li>
+                                <li id="nav-home"><a href="{{ url('administration') }}">Dashboard</a></li>
+                                <li id="nav-infos"><a href="{{ url('administration/logout') }}">Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -76,8 +77,9 @@
             </div>
         </div>
     </nav>
+    @endif
 </header>
-@endif
+
 
 
 
