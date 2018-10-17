@@ -4,20 +4,22 @@ namespace App\Http\Controllers\Administration;
 
 
 use App\Http\Controllers\Controller;
+use App\Settings;
 use Illuminate\Http\Request;
+use ErrorException;
 
 class DashboardController extends Controller
 {
-    public function __construct(Request $request)
-    {
-      if(!$request->has('creditentials'))
-        return redirect()->route('login');
-    }
-
     public function home(Request $request)
     {
+      if(!$request->session()->has('creditentials'))
+        return redirect()->route('login');
+
+        $Settings_instance = new Settings();
+        $Informations = $Settings_instance->Get();
+
         $folders = array_diff(scandir(public_path() . '\JAVA_UPDATER\files'), ['.', '..']);
-        return view('Administration.dashboard', ['folders' => $folders]);
+        return view('Administration.dashboard', ['folders' => $folders, 'informations' => $Informations]);
     }
 
     public function home_p(Request $request)
@@ -30,9 +32,8 @@ class DashboardController extends Controller
         } else if($del) {
           if(rmdir(public_path() . '\JAVA_UPDATER\files\/' . $del))
           {
-            try {
+            if(file_exists(public_path() . '\JAVA_UPDATER\xml/' . $del . ".xml"))
               unlink(public_path() . '\JAVA_UPDATER\xml/' . $del . ".xml");
-            } catch (ErrorException $e) { }
             return redirect()->route('dashboard')->with(['success' => 'Folder deleted !']);
           } else
             return redirect()->route('dashboard')->with(['error' => "This folder cannot be deleted !"]);

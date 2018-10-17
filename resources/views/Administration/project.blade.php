@@ -18,6 +18,24 @@
                     {{ Session::get('success') }}
                 </div>
             @endif
+            <div class="home-box" style="color:black;">
+                <h3 class="home-title">Add files</h3>
+                <hr>
+                <form method="post" action="{{ url('administration/project_upload') }}">
+                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                    <input type="hidden" name="FOLDER" value="{{ $FOLDER_NAME }}">
+                    <input type="file" name="FILES_LIST[]" class="btn btn-primary" multiple></input>
+                    <hr>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <input type="submit" name="project-submit" tabindex="4" class="form-control btn btn-block btn-info" value="Create project">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
 
             <div class="home-box" style="color:black;">
                 <h3 class="home-title">Project files</h3>

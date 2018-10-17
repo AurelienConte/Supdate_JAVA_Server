@@ -69,6 +69,7 @@
                         <div class="col-md-12 col-sm-12">
                             <ul class="navbar-nav">
                                 <li id="nav-home"><a href="{{ url('administration') }}">Dashboard</a></li>
+                                <li id="nav-news"><a href="{{ url('administration/settings') }}">Configuration</a></li>
                                 <li id="nav-infos"><a href="{{ url('administration/logout') }}">Logout</a></li>
                             </ul>
                         </div>

@@ -618,29 +618,35 @@ img.mceSmilieSprite {
     margin-top: 5px;
     margin-bottom: 15px;
 }
-.join-subversion {
+.error {
     font-family: 'Oswald',sans-serif;
     text-align: center;
     padding: 1px 5px 2px;
     margin-right: 5px;
-    border: 2px solid #ffc728;
+    border: 2px solid #7B2424;
     border-radius: 4px;
     font-size: 12px;
     font-weight: bold;
     letter-spacing: .5px;
     color:black;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 17px;
 }
-.join-ip {
+.validate {
     font-family: 'Oswald',sans-serif;
     text-align: center;
     padding: 1px 5px 2px;
     margin-right: 5px;
-    border: 2px solid #ffc728;
+    border: 2px solid #2fa360;
     border-radius: 4px;
     font-size: 19px;
     font-weight: bold;
     letter-spacing: .5px;
     color:black;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 17px;
 }
 .discord-title {
     color: black;

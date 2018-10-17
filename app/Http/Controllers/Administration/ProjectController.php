@@ -12,12 +12,14 @@ namespace App\Http\Controllers\Administration;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DCarbone\XMLWriterPlus;
-use ErrorException;
 
 class ProjectController extends Controller
 {
-    public function home($FOLDER_NAME)
+
+    public function home(Request $request, $FOLDER_NAME)
     {
+      if(!$request->session()->has('creditentials'))
+        return redirect()->route('login');
       $folders = array_diff(scandir(public_path() . '\JAVA_UPDATER\files/' . $FOLDER_NAME), ['.', '..']);
       return view('Administration.project', ['folders' => $folders, 'FOLDER_NAME' => $FOLDER_NAME]);
     }
@@ -68,11 +70,38 @@ class ProjectController extends Controller
         $xmlWriterPlus->endElement();
         $xmlWriterPlus->endDocument();
 
-        try {
+        if(file_exists(public_path() . '\JAVA_UPDATER\xml/' . $FOLDER . ".xml"))
           unlink(public_path() . '\JAVA_UPDATER\xml/' . $FOLDER . ".xml");
-        } catch (ErrorException $e) { }
-
         file_put_contents(public_path() . '\JAVA_UPDATER\xml/' . $FOLDER . ".xml", $xmlWriterPlus->outputMemory());
         return redirect()->route('dashboard')->with(['success' => 'XML generated : ' . public_path() . '\JAVA_UPDATER\xml/' . $FOLDER . ".xml"]);
+    }
+
+    public function create(Request $request)
+    {
+        $PROJECT_NAME = $request->input('PROJECT_NAME');
+
+        if($PROJECT_NAME) {
+          if(mkdir(public_path() . '\JAVA_UPDATER\files/' . $PROJECT_NAME, 777, 1))
+            return redirect()->route('dashboard')->with(['success' => 'Project created !']);
+          else
+            return redirect()->route('dashboard')->with(['error' => 'Project cannot be created ! :(']);
+        } else {
+          return redirect()->route('dashboard')->with(['error' => 'Project name is empty']);
+        }
+    }
+
+    public function upload(Request $request)
+    {
+        /*$FILES_LIST = $request->file('FILES_LIST');
+        $PROJECT_NAME = $request->input('FOLDER');
+
+        foreach ($FILES_LIST as $element) {
+          move_uploaded_file($element, public_path() . '\JAVA_UPDATER\files/' . $PROJECT_NAME . "/" . basename($element));
+        }
+
+        return redirect()->route('project_management', $PROJECT_NAME);*/
+
+
+        //https://stackoverflow.com/questions/44577380/how-to-upload-files-in-laravel-directly-into-public-folder
     }
 }
