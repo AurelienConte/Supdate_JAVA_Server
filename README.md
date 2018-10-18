@@ -18,21 +18,21 @@
 <p>DB_USERNAME={YOUR_USER}</p>
 <p>DB_PASSWORD={YOUR_PASSWORD}</p>
 </code>
-> <p>5 - Configure your php.ini with the following config :)</p>
-> <code>
-> <p>file_uploads = On</p>
-> <p>upload_max_filesize = 20G</p>
-> <p>max_file_uploads = 100</p>
-> <p>post_max_size = 20G</p>
-> </code>
-> <p>6 - After it go to : {YOUR_SERVER_ADDRESS}/public/install</p>
-> <p>7 - the server will ask you to create a account after it, you have finish the configuration ! enjoy !</p>
+<p>5 - Configure your php.ini with the following config :)</p>
+<code>
+<p>file_uploads = On</p>
+<p>upload_max_filesize = 20G</p>
+<p>max_file_uploads = 100</p>
+<p>post_max_size = 20G</p>
+</code>
+<p>6 - After it go to : {YOUR_SERVER_ADDRESS}/public/install</p>
+<p>7 - the server will ask you to create a account after it, you have finish the configuration ! enjoy !</p>
 
 ## How to use
 
-> <p>Create a project on your dashboard</p>
-> <p> Click on the new project in the project list </p>
-> <p> Uplaod files </p>
-> <p> Select files to include in the XML file </p>
-> <p> Generate the xml file </p>
-> <p> Finish :) you have configured the Server side, now let's go configure the client side ! </p>
+> <p>1 - Create a project on your dashboard</p>
+> <p>2 - Click on the new project in the project list </p>
+> <p>3 - Upload files </p>
+> <p>4 - Select files to include in the XML file </p>
+> <p>5 - Generate the xml file </p>
+> <p>6 - Finish :) you have configured the Server side, now let's go configure the client side ! </p>
