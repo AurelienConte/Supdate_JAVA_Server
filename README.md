@@ -5,6 +5,11 @@
 > The goal of the project is to make a simple way for updating your java app :) just few lines to gain a big time :) 
 This project is linked to my lib Supdate JAVA. The project allow you to create multiple project and upload files into. Easy to manage, easy life !
 
+## Features
+* Create multiple project folders
+* Server status with maintenance system
+* Easy manage your files (Create project / delete / view --- Upload files / Delete / add to download list !)
+
 ## Installation
 
 > <p>1 - You need to configure your web server with the Laravel System requirement : https://laravel.com/docs/5.7/installation</p>
