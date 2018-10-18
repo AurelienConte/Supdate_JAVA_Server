@@ -19,12 +19,12 @@
 <p>DB_PASSWORD={YOUR_PASSWORD}</p>
 </code>
 > <p>5 - Configure your php.ini with the following config :)</p>
-<code>
-<p>file_uploads = On</p>
-<p>upload_max_filesize = 20G</p>
-<p>max_file_uploads = 100</p>
-<p>post_max_size = 20G</p>
-</code>
+> <code>
+> <p>file_uploads = On</p>
+> <p>upload_max_filesize = 20G</p>
+> <p>max_file_uploads = 100</p>
+> <p>post_max_size = 20G</p>
+> </code>
 > <p>6 - After it go to : {YOUR_SERVER_ADDRESS}/public/install</p>
 > <p>7 - the server will ask you to create a account after it, you have finish the configuration ! enjoy !</p>
 
