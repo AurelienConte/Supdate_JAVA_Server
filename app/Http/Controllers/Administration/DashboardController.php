@@ -30,7 +30,7 @@ class DashboardController extends Controller
         if($see) {
           return redirect()->route('project_management', $see);
         } else if($del) {
-          if(rmdir(public_path() . '\JAVA_UPDATER\files\/' . $del))
+          if($this->deleteDirectory(public_path() . '\JAVA_UPDATER\files\/' . $del))
           {
             if(file_exists(public_path() . '\JAVA_UPDATER\xml/' . $del . ".xml"))
               unlink(public_path() . '\JAVA_UPDATER\xml/' . $del . ".xml");

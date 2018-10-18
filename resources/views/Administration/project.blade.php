@@ -21,7 +21,7 @@
             <div class="home-box" style="color:black;">
                 <h3 class="home-title">Add files</h3>
                 <hr>
-                <form method="post" action="{{ url('administration/project_upload') }}">
+                <form method="post" action="{{ url('administration/project_upload') }}" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                     <input type="hidden" name="FOLDER" value="{{ $FOLDER_NAME }}">
                     <input type="file" name="FILES_LIST[]" class="btn btn-primary" multiple></input>
@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-6 col-sm-offset-3">
-                                <input type="submit" name="project-submit" tabindex="4" class="form-control btn btn-block btn-info" value="Create project">
+                                <input type="submit" name="project-submit" tabindex="4" class="form-control btn btn-block btn-info" value="Upload file(s)">
                             </div>
                         </div>
                     </div>
@@ -43,8 +43,9 @@
                 <form method="post" action="{{ url('administration/project_management') }}">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                     <input type="hidden" name="FOLDER" value="{{ $FOLDER_NAME }}">
-                    <button type="button" id="check_all" class="btn btn-primary">Select all</button> | <button type="submit" name="see" class="btn btn-success">Generate xml</button>
-
+                    <button type="button" id="check_all" class="btn btn-primary">Select all</button> |
+                    <button type="submit" name="xml"  value="1" class="btn btn-success">Generate xml</button> |
+                    <button type="submit" name="del" value="1" class="btn btn-danger">Delete</button>
                 <hr>
                 <table class="table">
                     <thead class="thead-dark">

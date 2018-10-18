@@ -29,51 +29,62 @@ class ProjectController extends Controller
         $SELECTED = $request->input('SELECTED');
         $EXTRACT = $request->input('EXTRACT');
         $FOLDER = $request->input('FOLDER');
+        $XML = $request->input('xml');
+        $DEL = $request->input('del');
+
 
         if(!$SELECTED)
           return redirect()->route('project_management', $FOLDER)->with(['error' => 'No file selected !']);
-
-        $xmlWriterPlus = new XMLWriterPlus();
-        $xmlWriterPlus->openMemory();
-        $xmlWriterPlus->startDocument();
-
-        $xmlWriterPlus->writeComment('File provided by aurelien conte :)');
-        $xmlWriterPlus->startElement('content');
-
-        //Generate configuration part :)
-        $xmlWriterPlus->startElement('configuration');
-        $xmlWriterPlus->writeElement('folder', $FOLDER);
-        $xmlWriterPlus->endElement();
-
-        //generate file balise
-        foreach ($SELECTED as $item) {
-          $xmlWriterPlus->startElement('file');
-          $xmlWriterPlus->writeElement('name', $item);
-          $xmlWriterPlus->writeElement('md5', md5_file(public_path() . '\JAVA_UPDATER\files/' . $FOLDER . "/" . $item));
-          if(isset($EXTRACT)) {
-            $found = false;
-            foreach ($EXTRACT as $element) {
-              if($item == $element)
-                $found = true;
-            }
-            if($found)
-              $xmlWriterPlus->writeElement('extract', 'true');
-            else
-              $xmlWriterPlus->writeElement('extract', 'false');
-          } else {
-            $xmlWriterPlus->writeElement('extract', 'false');
+        if($DEL) {
+          foreach ($SELECTED as $item)
+          {
+            unlink(public_path() . '\JAVA_UPDATER\files/' . $FOLDER . "/" . $item);
           }
+          return redirect()->route('project_management', $FOLDER)->with(['success' => "Files deleted !"]);
+        } else if($XML) {
+          $xmlWriterPlus = new XMLWriterPlus();
+          $xmlWriterPlus->openMemory();
+          $xmlWriterPlus->startDocument();
+
+          $xmlWriterPlus->writeComment('File provided by aurelien conte :)');
+          $xmlWriterPlus->startElement('content');
+
+          //Generate configuration part :)
+          $xmlWriterPlus->startElement('configuration');
+          $xmlWriterPlus->writeElement('folder', $FOLDER);
           $xmlWriterPlus->endElement();
+
+          //generate file balise
+          foreach ($SELECTED as $item) {
+            $xmlWriterPlus->startElement('file');
+            $xmlWriterPlus->writeElement('name', $item);
+            $xmlWriterPlus->writeElement('md5', md5_file(public_path() . '\JAVA_UPDATER\files/' . $FOLDER . "/" . $item));
+            if(isset($EXTRACT)) {
+              $found = false;
+              foreach ($EXTRACT as $element) {
+                if($item == $element)
+                  $found = true;
+              }
+              if($found)
+                $xmlWriterPlus->writeElement('extract', 'true');
+              else
+                $xmlWriterPlus->writeElement('extract', 'false');
+            } else {
+              $xmlWriterPlus->writeElement('extract', 'false');
+            }
+            $xmlWriterPlus->endElement();
+          }
+
+          //close document
+          $xmlWriterPlus->endElement();
+          $xmlWriterPlus->endDocument();
+
+          if(file_exists(public_path() . '\JAVA_UPDATER\xml/' . $FOLDER . ".xml"))
+            unlink(public_path() . '\JAVA_UPDATER\xml/' . $FOLDER . ".xml");
+          file_put_contents(public_path() . '\JAVA_UPDATER\xml/' . $FOLDER . ".xml", $xmlWriterPlus->outputMemory());
+
+          return redirect()->route('dashboard')->with(['success' => 'XML generated : ' . public_path() . '\JAVA_UPDATER\xml/' . $FOLDER . ".xml"]);
         }
-
-        //close document
-        $xmlWriterPlus->endElement();
-        $xmlWriterPlus->endDocument();
-
-        if(file_exists(public_path() . '\JAVA_UPDATER\xml/' . $FOLDER . ".xml"))
-          unlink(public_path() . '\JAVA_UPDATER\xml/' . $FOLDER . ".xml");
-        file_put_contents(public_path() . '\JAVA_UPDATER\xml/' . $FOLDER . ".xml", $xmlWriterPlus->outputMemory());
-        return redirect()->route('dashboard')->with(['success' => 'XML generated : ' . public_path() . '\JAVA_UPDATER\xml/' . $FOLDER . ".xml"]);
     }
 
     public function create(Request $request)
@@ -92,14 +103,15 @@ class ProjectController extends Controller
 
     public function upload(Request $request)
     {
-        /*$FILES_LIST = $request->file('FILES_LIST');
+        $FILES_LIST = $request->file('FILES_LIST');
         $PROJECT_NAME = $request->input('FOLDER');
 
+
         foreach ($FILES_LIST as $element) {
-          move_uploaded_file($element, public_path() . '\JAVA_UPDATER\files/' . $PROJECT_NAME . "/" . basename($element));
+          move_uploaded_file($element, public_path() . '\JAVA_UPDATER\files/' . $PROJECT_NAME . "/" . $element->getClientOriginalName());
         }
 
-        return redirect()->route('project_management', $PROJECT_NAME);*/
+        return redirect()->route('project_management', $PROJECT_NAME);
 
 
         //https://stackoverflow.com/questions/44577380/how-to-upload-files-in-laravel-directly-into-public-folder
