@@ -2,8 +2,7 @@
 
 ## Introduction
 
-> 
-The goal of the project is to make a simple way for updating your java app :) just few lines to gain a big time :) 
+> The goal of the project is to make a simple way for updating your java app :) just few lines to gain a big time :) 
 This project is linked to my lib Supdate JAVA. The project allow you to create multiple project and upload files into. Easy to manage, easy life !
 
 ## Installation
