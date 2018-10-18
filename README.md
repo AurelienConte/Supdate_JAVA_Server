@@ -2,12 +2,14 @@
 
 ## Introduction
 
-> This project is linked to my lib Supdate JAVA. The project allow you to create multiple project and upload files into. Easy to manage :) easy life !
+> 
+The goal of the project is to make a simple way for updating your java app :) just few lines to gain a big time :) 
+This project is linked to my lib Supdate JAVA. The project allow you to create multiple project and upload files into. Easy to manage, easy life !
 
 ## Installation
 
 > <p>1 - You need to configure your web server with the Laravel System requirement : https://laravel.com/docs/5.7/installation</p>
-> <p>2 - Download the project and install it as a laravel framework :)</p>
+> <p>2 - Download the project and install it as a laravel framework</p>
 > <p>3 - Go in the public folder of the app and set the 777 permissions on the folder "JAVA_UPDATER" :)</p>
 > <p>4 - Configure the .env file</p>
 ```php
