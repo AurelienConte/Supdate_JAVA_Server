@@ -19,7 +19,7 @@ DB_USERNAME={YOUR_USER}
 DB_PASSWORD={YOUR_PASSWORD}
 ```
 > <p>5 - Configure your php.ini with the following config :)</p>
-```
+```php
 file_uploads = On
 upload_max_filesize = 20G
 max_file_uploads = 100
